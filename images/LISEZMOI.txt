@@ -1,0 +1,2 @@
+Déposez ici les photos des produits (format carré conseillé, ex. 800 x 800 px, en .jpg ou .webp).
+Puis, dans script.js, ajoutez au produit concerné :  img: "images/nom-du-fichier.jpg"
