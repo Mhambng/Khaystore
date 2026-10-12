@@ -506,7 +506,7 @@ function openPanel(sel) {
 function closeAll() {
   $$(".drawer.open, .modal.open, .nav.open").forEach((el) => el.classList.remove("open"));
   $("#overlay").classList.remove("show");
-  document.body.classList.remove("no-scroll", "menu-open");
+  document.body.classList.remove("no-scroll");
 }
 
 /* ---------- Recherche avec suggestions ---------- */
@@ -654,10 +654,24 @@ document.addEventListener("click", (e) => {
 
 $("#menuToggle").addEventListener("click", () => {
   $("#nav").classList.add("open");
-  document.body.classList.add("menu-open");
   $("#overlay").classList.add("show");
 });
 $$("#nav a").forEach((a) => a.addEventListener("click", closeAll));
+
+// Sur téléphone, le menu est sorti de l'en-tête pour passer au-dessus du voile sombre
+(() => {
+  const nav = $("#nav");
+  const home = nav.parentNode;
+  const next = nav.nextElementSibling;
+  const mobile = window.matchMedia("(max-width: 860px)");
+  const place = () => {
+    closeAll();
+    if (mobile.matches) document.body.appendChild(nav);
+    else home.insertBefore(nav, next);
+  };
+  mobile.addEventListener("change", place);
+  place();
+})();
 
 $("#searchInput").addEventListener("input", (e) => {
   searchTerm = e.target.value.trim().toLowerCase();

@@ -617,5 +617,46 @@ h1, h2, h3 { font-family: "Playfair Display", Georgia, serif; line-height: 1.15;
 .topbar a { color: inherit; text-decoration: underline; }
 .footer p a { display: inline; }
 
-/* Menu mobile ouvert : l'en-tête (qui contient le menu) passe au-dessus du voile */
-body.menu-open .header { z-index: 96; }
+/* ============ Menu mobile ============ */
+.nav__head, .nav__foot { display: none; }
+@media (max-width: 860px) {
+  .nav {
+    width: min(320px, 86vw); height: 100vh; height: 100dvh; padding: 0; gap: 0;
+    background: var(--bg); overflow-y: auto;
+  }
+  .nav::before {
+    content: ""; display: block; height: 4px; flex: none;
+    background: linear-gradient(90deg, var(--primary), var(--gold));
+  }
+  .nav__head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 20px 18px 28px; border-bottom: 1px solid var(--border);
+  }
+  .nav__head .logo { font-size: 1.6rem; padding: 0; }
+  .nav__head .logo::after, .nav__foot a::after { display: none; }
+  .nav > a {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 28px; border-bottom: 1px solid var(--border);
+    font-family: "Playfair Display", Georgia, serif; font-size: 1.45rem; font-weight: 600;
+    transition: background .25s, color .25s, padding-left .3s var(--ease);
+  }
+  .nav > a::after {
+    content: "→"; position: static; width: auto; height: auto; background: none;
+    transform: none; font-family: "Inter", sans-serif; font-size: 1.1rem; color: var(--primary);
+    transition: transform .3s var(--ease);
+  }
+  .nav > a:hover, .nav > a:active { background: var(--bg-alt); color: var(--primary); padding-left: 34px; }
+  .nav > a:hover::after, .nav > a:active::after { transform: translateX(4px); }
+  .nav.open > a { animation: navIn .5s var(--ease) both; }
+  .nav.open > a:nth-of-type(2) { animation-delay: .06s; }
+  .nav.open > a:nth-of-type(3) { animation-delay: .12s; }
+  .nav.open > a:nth-of-type(4) { animation-delay: .18s; }
+  .nav.open > a:nth-of-type(5) { animation-delay: .24s; }
+  @keyframes navIn { from { opacity: 0; transform: translateX(-24px); } }
+  .nav__foot {
+    display: flex; flex-direction: column; gap: 12px; margin-top: auto;
+    padding: 24px 28px 32px; background: var(--bg-alt);
+  }
+  .nav__foot p { color: var(--muted); font-size: .95rem; }
+  .nav__foot .btn { width: 100%; font-size: .95rem; }
+}
