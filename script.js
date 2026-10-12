@@ -506,7 +506,7 @@ function openPanel(sel) {
 function closeAll() {
   $$(".drawer.open, .modal.open, .nav.open").forEach((el) => el.classList.remove("open"));
   $("#overlay").classList.remove("show");
-  document.body.classList.remove("no-scroll");
+  document.body.classList.remove("no-scroll", "menu-open");
 }
 
 /* ---------- Recherche avec suggestions ---------- */
@@ -654,6 +654,7 @@ document.addEventListener("click", (e) => {
 
 $("#menuToggle").addEventListener("click", () => {
   $("#nav").classList.add("open");
+  document.body.classList.add("menu-open");
   $("#overlay").classList.add("show");
 });
 $$("#nav a").forEach((a) => a.addEventListener("click", closeAll));

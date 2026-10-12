@@ -616,3 +616,6 @@ h1, h2, h3 { font-family: "Playfair Display", Georgia, serif; line-height: 1.15;
 @media (min-width: 861px) { .footer__grid { grid-template-columns: 2fr 1fr 1.4fr; } }
 .topbar a { color: inherit; text-decoration: underline; }
 .footer p a { display: inline; }
+
+/* Menu mobile ouvert : l'en-tête (qui contient le menu) passe au-dessus du voile */
+body.menu-open .header { z-index: 96; }
