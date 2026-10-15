@@ -221,9 +221,9 @@
       <div id="checkoutContent">
         <h3>Finaliser la commande</h3>
         <form id="checkoutForm" class="form">
-          <label>Nom complet<input name="name" required></label>
-          <label>Téléphone<input name="phone" type="tel" required placeholder="77 123 45 67"></label>
-          <label>Adresse de livraison<input name="address" required></label>
+          <label>Nom complet<input name="name" required maxlength="80" autocomplete="name"></label>
+          <label>Téléphone<input name="phone" type="tel" required maxlength="20" placeholder="77 123 45 67" autocomplete="tel"></label>
+          <label>Adresse de livraison<input name="address" required maxlength="200" autocomplete="street-address"></label>
           <label>Mode de paiement
             <select name="payment">
               <option>Paiement à la livraison</option>

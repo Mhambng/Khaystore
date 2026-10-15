@@ -126,6 +126,8 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 const money = (n) => `${Math.round(n).toLocaleString("fr-FR")} ${SETTINGS.currency}`;
+// Neutralise le texte saisi par un visiteur avant de l'afficher dans la page
+const esc = (t) => String(t).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const findProduct = (id) => PRODUCTS.find((p) => p.id === id);
 const stars = (r) => "★".repeat(Math.round(r)) + "☆".repeat(5 - Math.round(r));
 const hasPrice = (p) => typeof p.price === "number";
@@ -453,10 +455,10 @@ function submitOrder(e) {
   content.innerHTML = `
     <div class="success">
       <div class="success__icon">🎉</div>
-      <h3>Merci ${data.name.split(" ")[0]} !</h3>
+      <h3>Merci ${esc(data.name.trim().split(" ")[0])} !</h3>
       <p>Votre commande <strong>${orderId}</strong> de <strong>${money(t.total)}</strong> est prête.<br>
       ${SETTINGS.whatsappNumber ? "WhatsApp s'ouvre avec le détail de votre commande : <strong>envoyez le message</strong> pour la confirmer." : ""}
-      Nous vous recontacterons au ${data.phone} pour convenir de la livraison.</p>
+      Nous vous recontacterons au ${esc(data.phone)} pour convenir de la livraison.</p>
       <button class="btn btn--primary" data-close>Continuer mes achats</button>
     </div>`;
   confetti();
